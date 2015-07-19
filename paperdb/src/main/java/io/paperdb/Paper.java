@@ -19,9 +19,9 @@ import android.os.Bundle;
 public class Paper {
     static final String TAG = "paperdb";
 
-    private static final String DEFAULT_DB_NAME = "io.paperdb";
+    public static final String DEFAULT_DB_NAME = "io.paperdb";
 
-    private static Paper INSTANCE;
+    private static volatile Paper INSTANCE;
 
     private final Storage mStorage;
 
@@ -125,7 +125,8 @@ public class Paper {
     }
 
     private Paper(Context context, String dbName) {
-        mStorage = new DbStoragePlainFile(context.getApplicationContext(), dbName);
+        Context appContext = context.getApplicationContext();
+        mStorage = new DbStoragePlainFile( appContext.getFilesDir(), dbName);
     }
 
 }
