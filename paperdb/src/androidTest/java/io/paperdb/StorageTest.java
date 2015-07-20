@@ -1,5 +1,6 @@
 package io.paperdb;
 
+import android.content.Context;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.After;
@@ -12,6 +13,7 @@ import java.io.File;
 import io.paperdb.testdata.Person;
 import io.paperdb.testdata.TestDataGenerator;
 
+import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static junit.framework.Assert.assertEquals;
 
 @RunWith(AndroidJUnit4.class)
@@ -22,7 +24,8 @@ public class StorageTest {
 
     @Before
     public void setUp() throws Exception {
-        storage = new DbStoragePlainFile(FILES_DIRECTORY, Paper.DEFAULT_DB_NAME);
+        Context context = getTargetContext();
+        storage = new DbStoragePlainFile(context.getFilesDir(), Paper.DEFAULT_DB_NAME);
     }
 
     @Test

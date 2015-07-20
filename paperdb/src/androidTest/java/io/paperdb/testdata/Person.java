@@ -59,7 +59,7 @@ public class Person {
 
         if (mAge != person.mAge) return false;
         if (!Arrays.equals(mBikes, person.mBikes)) return false;
-        if (!mName.equals(person.mName)) return false;
+        if (mName != null ? !mName.equals(person.mName) : person.mName != null) return false;
         //noinspection RedundantIfStatement
         if (mPhoneNumbers != null ? !mPhoneNumbers.equals(person.mPhoneNumbers) : person.mPhoneNumbers != null)
             return false;
