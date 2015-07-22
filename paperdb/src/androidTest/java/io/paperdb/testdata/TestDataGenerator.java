@@ -21,12 +21,14 @@ public class TestDataGenerator {
     public static Person genPerson(int i) {
         Person p = new Person();
         p.setAge(i);
+        p.setName("Name" + i);
         p.setBikes(new String[2]);
         p.getBikes()[0] = "Kellys gen#" + i;
         p.getBikes()[1] = "Trek gen#" + i;
         p.setPhoneNumbers(new ArrayList<String>());
         p.getPhoneNumbers().add("0-KEEP-CALM" + i);
         p.getPhoneNumbers().add("0-USE-PAPER" + i);
+        p.setGroups(new ArrayList<Group>());
         return p;
     }
 
@@ -37,5 +39,13 @@ public class TestDataGenerator {
             map.put(i++, person);
         }
         return map;
+    }
+
+    @NonNull
+    public static Group genGroup(int i) {
+        Group group = new Group();
+        group.setName("Name" + i);
+        group.setContacts(new ArrayList<Person>());
+        return group;
     }
 }

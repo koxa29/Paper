@@ -8,6 +8,24 @@ public class Person {
     private int mAge;
     private List<String> mPhoneNumbers;
     private String[] mBikes;
+    private Person relative;
+    private List<Group> groups;
+
+    public List<Group> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(List<Group> groups) {
+        this.groups = groups;
+    }
+
+    public Person getRelative() {
+        return relative;
+    }
+
+    public void setRelative(Person relative) {
+        this.relative = relative;
+    }
 
     public String getName() {
         return mName;
@@ -44,7 +62,7 @@ public class Person {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || Person.class != o.getClass()) return false;
+        if (o == null || getClass() != o.getClass()) return false;
 
         Person person = (Person) o;
 
@@ -54,8 +72,11 @@ public class Person {
         //noinspection RedundantIfStatement
         if (mPhoneNumbers != null ? !mPhoneNumbers.equals(person.mPhoneNumbers) : person.mPhoneNumbers != null)
             return false;
-
-        return true;
+        if (relative == null && person.relative == null)
+            return true;
+        if (relative == null || person.relative == null)
+            return false;
+        return relative.equals(person.relative);
     }
 
     @Override
@@ -64,6 +85,20 @@ public class Person {
         result = 31 * result + mAge;
         result = 31 * result + (mPhoneNumbers != null ? mPhoneNumbers.hashCode() : 0);
         result = 31 * result + (mBikes != null ? Arrays.hashCode(mBikes) : 0);
+        result = 31 * result + (relative != null ?
+                (relative == this ? 0 : relative.hashCode()) : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "mName='" + mName + '\'' +
+                ", mAge=" + mAge +
+                ", mPhoneNumbers=" + mPhoneNumbers +
+                ", mBikes=" + Arrays.toString(mBikes) +
+                ", relative=" + (relative == this ? "[self]" : relative) +
+                ", hashCode=" + hashCode() +
+                '}';
     }
 }
